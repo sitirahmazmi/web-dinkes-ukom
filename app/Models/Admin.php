@@ -8,12 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Admin extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'nama_admin',
-        'nip',
-        'password'
-    ];
+    use HasFactory, SoftDeletes;
+    protected $guarded = [];
+    
     public function biodata()
     {
         return $this->hasOne(Biodata::class);
@@ -23,5 +20,5 @@ class Admin extends Model
     {
         return $this->hasOne(Upload::class);
     }
-    use SoftDeletes;
+
 }

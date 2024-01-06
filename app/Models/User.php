@@ -42,6 +42,16 @@ class User extends Authenticatable implements LaratrustUser
         'password' => 'hashed',
     ];
 
+    public function admin()
+    {
+        return $this->hasOne('App\Models\Admin');
+    }
+
+    public function peserta()
+    {
+        return $this->hasOne('App\Models\Peserta');
+    }
+
     public function biodata()
     {
         return $this->hasMany(Biodata::class);

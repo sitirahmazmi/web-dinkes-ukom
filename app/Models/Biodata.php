@@ -8,29 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Biodata extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'nama',
-        'user_id',
-        'admin_id',
-        'unit_kerja',
-        'kab_kota',
-        'jenis_jabatan_fungsional',
-        'kategori',
-        'jenjang_saat_ini',
-        'jenjang_akan_diduduki',
-        'nomor_wa',
-        'email',
-        'no_sk_pangkat_terakhir',
-        'tgl_sk_pangkat_terakhir',
-        'no_sk_fungsional_terakhir',
-        'tgl_sk_fungsional_terakhir',
-        'no_sk_pencatuman_gelar',
-        'tgl_sk_pencatuman_gelar',
-        'no_ijazah_terakhir',
-        'tgl_ijazah_terakhir'
-    ];
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
+    protected $table = 'biodatas';
+    protected $guarded = [];
 
     public function user()
     {
@@ -38,6 +18,6 @@ class Biodata extends Model
     }
     public function admin()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Admin::class);
     }
 }
