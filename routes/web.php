@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -29,5 +29,8 @@ Route::get('/test', function(){
 });
 Route::get('/user/biodata',[App\Http\Controllers\UserController::class, 'input'])->name('biodata');
 Route::post('/user/biodata/input',[App\Http\Controllers\UserController::class, 'store'])->name('biodata.store');
+Route::post('/user/biodata/{id}}',[App\Http\Controllers\UserController::class, 'updateBiodata'])->name('biodata.update');
+Route::get('/user/biodata/{id}}',[App\Http\Controllers\UserController::class, 'updateBiodata'])->name('biodata.update');
+Route::get('/user/biodata/edit}',[App\Http\Controllers\UserController::class, 'editBiodata'])->name('biodata.edit');
 
 

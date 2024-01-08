@@ -2,7 +2,7 @@
 @section('title','Edit Biodata')
 @section('head','Biodata')
 @section('content')
-    <form action="{{ route('biodata.update',$biodata->id) }}" method="post">
+    <form action="{{ route('biodata.edit',$biodata->id) }}" method="post">
         @csrf
         <div class="row">
             <div class="col-6">

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('admin_id');
             $table->string('nama');
+            $table->string('nip');
             $table->string('unit_kerja');
             $table->string('kab_kota');
             $table->string('jenis_jabatan_fungsional');
@@ -35,7 +35,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('admin_id')->references('id')->on('admins')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

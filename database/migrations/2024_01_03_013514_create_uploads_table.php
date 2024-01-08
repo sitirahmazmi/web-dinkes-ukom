@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('admin_id');
             $table->string('sk_pangkat_terakhir');
             $table->string('sk_fungsional_terakhir');
             $table->string('sk_pencantuman_gelar');
@@ -23,10 +22,10 @@ return new class extends Migration
             $table->string('sip');
             $table->string('surat_rekomendasi');
             $table->string('portofolio');
+            $table->string('file_path');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('admin_id')->references('id')->on('admins')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
