@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +29,11 @@ Route::get('/template', function(){
 Route::get('/test', function(){
     return view('test');
 });
-Route::get('/user/biodata',[App\Http\Controllers\UserController::class, 'input'])->name('biodata');
-Route::post('/user/biodata/input',[App\Http\Controllers\UserController::class, 'store'])->name('biodata.store');
-Route::post('/user/biodata/{id}}',[App\Http\Controllers\UserController::class, 'updateBiodata'])->name('biodata.update');
-Route::get('/user/biodata/{id}}',[App\Http\Controllers\UserController::class, 'updateBiodata'])->name('biodata.update');
-Route::get('/user/biodata/edit}',[App\Http\Controllers\UserController::class, 'editBiodata'])->name('biodata.edit');
-
+Route::get('/user/biodata',[UserController::class, 'input'])->name('biodata');
+Route::post('/user/biodata/input',[UserController::class, 'store'])->name('biodata.store');
+Route::post('/user/biodata/{id}',[UserController::class, 'updateBiodata']);
+Route::get('/user/biodata/{id}',[UserController::class, 'updateBiodata'])->name('biodata.update');
+Route::get('/user/biodata/edit',[UserController::class, 'editBiodata'])->name('biodata.edit');
+Route::get('/user/upload', [UserController::class, 'createUpload']);
+Route::post('/user/upload', [UserController::class, 'fileUpload'])->name('fileUpload');
 

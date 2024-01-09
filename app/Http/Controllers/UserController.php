@@ -89,7 +89,7 @@ class UserController extends Controller
     public function tampil() 
     {
         $result = User::all();
-        return view('lihat_data')->with('data', $result);
+        return view('data_peserta')->with('data', $result);
     }
 
     public function updateBiodata(Request $form, Biodata $biodatas) 
@@ -122,6 +122,46 @@ class UserController extends Controller
         return view('edit_biodata')->with('biodata', $result);
     }
 
+    public function createUpload(){
+        return view('form_upload');
+    }
+
+    public function fileUpload(Request $req){
+        if (auth()->check()) {
+            $req->validate([
+            'file' => 'required|mimes:csv,txt,doc,docx
+            ,xlx,xls,pdf|max:3072'
+            ]);
+            $fileModel = new Upload;
+            if($req->file()) {
+                $fileName = time().'_'.$req->file->getClientOriginalName();
+                $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
+                $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
+                $fileModel->save();
+                return back()
+                ->with('success','File has been uploaded.')
+                ->with('file', $fileName);
+            }
+        }
+    }
+    
     public function editUpload($uploads) {
         $result = Upload::where('id',$uploads)->first();
         return view('edit_upload')->with('upload', $result);

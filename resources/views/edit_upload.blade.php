@@ -7,13 +7,25 @@
     <div class="row">
         <div class="col-6">
             <div class="form-group">
-                <br><label for="nama" >Nama</label>
-                <input type="text" class="form-control" name="nama" value="{{ $biodata->nama }}">
-                <br><label for="nip" >NIP</label>
-                <input type="text" class="form-control" name="nip" value="{{ $biodata->nip }}">
-                <br><label for="unit_kerja" >Unit Kerja</label>
-                <input type="text" class="form-control" name="unit_kerja" value="{{ $biodata->unit_kerja }}">
-                <br><label for="kab_kota" >Kabupaten/Kota</label>
+                <br><label for="sk_pangkat_terakhir" >SK Pangkat Terakhir</label>
+                <input type="text" class="form-control" name="sk_pangkat_terakhir" value="{{ $upload->sk_pangkat_terakhir }}">
+                <br><label for="sk_fungsional_terakhir" >SK Fungsional Terakhir</label>
+                <input type="text" class="form-control" name="sk_fungsional_terakhir" value="{{ $upload->sk_fungsional_terakhir }}">
+                <br><label for="sk_pencantuman_gelar" >SK atau Surat Pencantuman Gelar</label>
+                <input type="text" class="form-control" name="sk_pencantuman_gelar" value="{{ $upload->sk_pencantuman_gelar }}">
+                <br><label for="ijazah_terakhir" >Ijazah Terakhir</label>
+                <input type="text" class="form-control" name="ijazah_terakhir" value="{{ $upload->ijazah_terakhir }}">
+                <br><label for="str" >Surat Tanda Registrasi (STR)</label>
+                <input type="text" class="form-control" name="str" value="{{ $upload->str }}">
+                <br><label for="sip" >Surat Izin Praktik (SIP)</label>
+                <input type="text" class="form-control" name="sip" value="{{ $upload->sip }}">
+                <br><label for="surat_rekomendasi" >Surat Rekomendasi</label>
+                <input type="text" class="form-control" name="surat_rekomendasi" value="{{ $upload->surat_rekomendasi }}">
+                <br><label for="portofolio" >Portofolio</label>
+                <input type="text" class="form-control" name="portofolio" value="{{ $upload->portofolio }}">
+                <br><label for="skp" >Sasaran Kinerja Pegawai (SKP)</label>
+                <input type="text" class="form-control" name="skp" value="{{ $upload->skp }}">
+                {{-- <br><label for="kab_kota" >Kabupaten/Kota</label>
                 <select class="form-select" name="kab_kota" id="kab_kota" value="{{ $biodata->kab_kota }}">
                     <option value="Kabupaten Sambas" {{ old('kab_kota')=='Kabupaten Sambas' ? 'selected': '' }}>
                     Kabupaten Sambas
@@ -57,8 +69,8 @@
                     <option value="Kota Singkawang" {{ old('kab_kota')=='Kota Singkawang' ? 'selected': '' }}>
                     Kota Singkawang
                     </option>
-                </select>
-                <br><label for="jenis_jabatan_fungsional" >Jenis Jabatan Fungsional</label>
+                </select> --}}
+                {{-- <br><label for="jenis_jabatan_fungsional" >Jenis Jabatan Fungsional</label>
                 <select class="form-select" name="jenis_jabatan_fungsional" id="jenis_jabatan_fungsional" value="{{ $biodata->jenis_jabatan_fungsional }}">
                     <option value="Jabatan Fungsional Administrator Kesehatan" {{ old('jenis_jabatan_fungsional')=='Jabatan Fungsional Administrator Kesehatan' ? 'selected': '' }}>
                     Jabatan Fungsional Administrator Kesehatan
@@ -177,11 +189,11 @@
                     </option>
                     <option value="Ahli Madya" {{ old('jenjang_akan_diduduki')=='Ahli Madya' ? 'selected': '' }}>
                     Ahli Madya
-                    </option>
-                </select>
+                    </option> --}}
+                {{-- </select>
                 <br><label for="nomor_wa" >Nomor WhatsApp</label>
-                <input type="text" class="form-control" name="nomor_wa" value="{{ $biodata->nomor_wa }}">
-                <br><label for="email" >Email</label>
+                <input type="text" class="form-control" name="nomor_wa" value="{{ $biodata->nomor_wa }}"> --}}
+                {{-- <br><label for="email" >Email</label>
                 <input type="text" class="form-control" name="email" value="{{ $biodata->email }}">
                 <br><label for="no_sk_pangkat_terakhir" >Nomor SK Pangkat Terakhir</label>
                 <input type="text" class="form-control" name="no_sk_pangkat_terakhir" value="{{ $biodata->no_sk_pangkat_terakhir }}">
@@ -198,7 +210,7 @@
                 <br><label for="no_ijazah_terakhir" >Nomor Ijazah Terakhir</label>
                 <input type="text" class="form-control" name="no_ijazah_terakhir" value="{{ $biodata->no_ijazah_terakhir }}">
                 <br><label for="tgl_ijazah_terakhir" >Tanggal Ijazah Terakhir</label>
-                <input type="date" class="form-control" name="tgl_ijazah_terakhir" value="{{ $biodata->tgl_ijazah_terakhir }}">
+                <input type="date" class="form-control" name="tgl_ijazah_terakhir" value="{{ $biodata->tgl_ijazah_terakhir }}"> --}}
 
             </div>
         </div>
