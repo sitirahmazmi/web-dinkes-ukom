@@ -34,6 +34,6 @@ Route::post('/user/biodata/input',[UserController::class, 'store'])->name('bioda
 Route::post('/user/biodata/{id}',[UserController::class, 'updateBiodata']);
 Route::get('/user/biodata/{id}',[UserController::class, 'updateBiodata'])->name('biodata.update');
 Route::get('/user/biodata/edit',[UserController::class, 'editBiodata'])->name('biodata.edit');
-Route::get('/user/upload', [UserController::class, 'createUpload']);
+Route::get('/user/upload', [UserController::class, 'createUpload'])->name('upload');
 Route::post('/user/upload', [UserController::class, 'fileUpload'])->name('fileUpload');
 

@@ -62,7 +62,7 @@
         </div>
             
         <div class="mb-3">
-            <br><label for="sip" class="form-label">Surat Izin Praktik</label>
+            <br><label for="sip" class="form-label">Surat Izin Praktik (SIP)</label>
             <div class="custom-file">
                 <input type="file" name="file" class="custom-file-input" id="chooseFile">
                 <label class="custom-file-label" for="chooseFile">Select file</label>
@@ -86,7 +86,7 @@
         </div>
             
         <div class="mb-3">
-            <br><label for="skp" class="form-label">Sasaran Kerja Pegawai</label>
+            <br><label for="skp" class="form-label">Sasaran Kerja Pegawai (SKP)</label>
             <div class="custom-file">
                 <input type="file" name="file" class="custom-file-input" id="chooseFile">
                 <label class="custom-file-label" for="chooseFile">Select file</label>

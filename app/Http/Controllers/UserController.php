@@ -114,7 +114,7 @@ class UserController extends Controller
             'tgl_ijazah_terakhir' => 'required'
         ]);
         $biodatas->update($result);
-        return redirect()->route('data_biodata');
+        return redirect()->route('data_diri');
     }
 
     public function editBiodata($biodatas) {
@@ -129,11 +129,12 @@ class UserController extends Controller
     public function fileUpload(Request $req){
         if (auth()->check()) {
             $req->validate([
-            'file' => 'required|mimes:csv,txt,doc,docx
-            ,xlx,xls,pdf|max:3072'
+                'file' => 'required|mimes:csv,txt,doc,docx
+                ,xlx,xls,pdf|max:3072'
             ]);
             $fileModel = new Upload;
             if($req->file()) {
+                $user_id = auth()->user()->id;
                 $fileName = time().'_'.$req->file->getClientOriginalName();
                 $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
                 $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();

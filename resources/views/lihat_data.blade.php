@@ -1,13 +1,13 @@
 @extends('layouts.template')
-@section('title','Data Diri')
-@section('head','Data Diri')
+@section('title','Lihat Data')
+@section('head','Lihat Data')
 @section('content')
 <body>
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="align-items-center">
-                    <h2>Tabel Data Diri</h2>
+                    <h2>Lihat Data</h2>
                     <a href="{{ route('siti.create') }}" class="btn btn-primary">Tambah Data</a>
                 </div>
                 @if (session()->has('pesan'))
