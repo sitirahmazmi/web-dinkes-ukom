@@ -26,11 +26,14 @@
             <a class="nav-link" href="{{ url('/user/biodata') }}">Form Biodata</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('upload') }}">Upload File</a>
+            <a class="nav-link" href="{{ route('uploads.create') }}">Upload File</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('uploads.create') }}">Upload File2</a>
+            <a class="nav-link" href="{{ url('/user/lihatData') }}">Lihat Data</a>
           </li>
+          {{-- <li class="nav-item">
+            <a class="nav-link" href="{{ route('upload') }}">Upload File</a>
+          </li> --}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
               Dropdown

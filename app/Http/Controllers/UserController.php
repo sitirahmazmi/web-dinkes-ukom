@@ -89,10 +89,10 @@ class UserController extends Controller
         }
     }
 
-    public function tampil() 
+    public function lihatData() 
     {
-        $result = User::all();
-        return view('data_peserta')->with('data', $result);
+        $result = Biodata::all();
+        return view('lihat_data')->with('data', $result);
     }
 
     public function updateBiodata(Request $form, Biodata $biodatas) 
@@ -129,17 +129,21 @@ class UserController extends Controller
         return view('form_upload');
     }
 
-    public function indexFile()
-    {
-        // Retrieve all uploads for display
-        $uploads = Upload::all();
+    // public function indexFile()
+    // {
+    //     // Retrieve all uploads for display
+    //     $uploads = Upload::all();
 
-        return view('uploads.index', compact('uploads'));
-    }
+    //     return view('uploads.index', compact('uploads'));
+    // }
 
-    public function createFile()
+    // public function createFile()
+    // {
+    //     return view('uploads.create');
+    // }
+    public function uploadFile()
     {
-        return view('uploads.create');
+        return view('form_upload');
     }
 
     public function storeFile(Request $request)
@@ -147,7 +151,7 @@ class UserController extends Controller
         $user_id = auth()->user()->id;
 
         $request->validate([
-            'files.*' => 'required|mimes:pdf,doc,docx|max:10240', // Contoh: Hanya izinkan file PDF, DOC, atau DOCX dengan ukuran maksimal 10MB
+            'file' => 'required|ends_with:pdf,doc,docx|allowed_file_extension|max:10240', // Contoh: Hanya izinkan file PDF, DOC, atau DOCX dengan ukuran maksimal 10MB
         ]);
 
         foreach ($request->file('files') as $file) {
@@ -160,8 +164,8 @@ class UserController extends Controller
                     ->max('file_version') + 1,
             ]);
         }
-
-        return redirect()->route('uploads.index')->with('success', 'Files uploaded successfully.');
+        dump($upload);
+        // return redirect()->route('uploads.index')->with('success', 'Files uploaded successfully.');
     }
     // public function fileUpload(Request $request){
     //     if (auth()->check()) {

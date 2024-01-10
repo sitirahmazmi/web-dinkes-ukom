@@ -29,17 +29,18 @@ Route::get('/template', function(){
 Route::get('/test', function(){
     return view('test');
 });
+Route::get('/user/lihatData',[UserController::class, 'lihatData']);
 Route::get('/user/biodata',[UserController::class, 'input'])->name('biodata');
 Route::post('/user/biodata/input',[UserController::class, 'store'])->name('biodata.store');
 Route::post('/user/biodata/{id}',[UserController::class, 'updateBiodata']);
 Route::get('/user/biodata/{id}',[UserController::class, 'updateBiodata'])->name('biodata.update');
 Route::get('/user/biodata/edit',[UserController::class, 'editBiodata'])->name('biodata.edit');
-Route::get('/user/upload', [UserController::class, 'createUpload'])->name('upload');
-Route::post('/user/upload', [UserController::class, 'fileUpload'])->name('fileUpload');
+// Route::get('/user/upload', [UserController::class, 'createUpload'])->name('upload');
+// Route::post('/user/upload', [UserController::class, 'fileUpload'])->name('fileUpload');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/uploads', [UserController::class, 'indexFile'])->name('uploads.index');
-    Route::get('/uploads/create', [UserController::class, 'createFile'])->name('uploads.create');
+    //Route::get('/uploads', [UserController::class, 'indexFile'])->name('uploads.index');
+    Route::get('/uploads/create', [UserController::class, 'uploadFile'])->name('uploads.create');
     Route::post('/uploads', [UserController::class, 'storeFile'])->name('uploads.store');
     // Add other routes as needed
 });

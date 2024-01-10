@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Validator::extend('allowed_file_extension', function ($attribute, $value, $parameters, $validator) {
+            // Define the allowed file extensions
+            $allowedExtensions = ['pdf', 'doc', 'docx'];
+
+            // Check if the file extension is in the allowed list
+            $extension = strtolower(pathinfo($value->getClientOriginalName(), PATHINFO_EXTENSION));
+            return in_array($extension, $allowedExtensions);
+        });
     }
 }
