@@ -7,5 +7,15 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    //
+    public function editData() {
+
+    }
+
+    public function verifData() {
+
+    }
+
+    public function deleteData() {
+        
+    }
 }

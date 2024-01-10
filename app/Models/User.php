@@ -52,13 +52,14 @@ class User extends Authenticatable implements LaratrustUser
         return $this->hasOne('App\Models\Peserta');
     }
 
-    public function biodata()
+    public function biodatas()
     {
         return $this->hasMany(Biodata::class);
     }
 
-    public function upload()
+    public function uploads()
     {
         return $this->hasMany(Upload::class);
     }
+
 }
