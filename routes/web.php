@@ -29,6 +29,7 @@ Route::get('/template', function(){
 Route::get('/test', function(){
     return view('test');
 });
+Route::get('/user/dashboard',[UserController::class, 'dashboardUser']);
 Route::get('/user/lihatData',[UserController::class, 'lihatData']);
 Route::get('/user/biodata',[UserController::class, 'input'])->name('biodata');
 Route::post('/user/biodata/input',[UserController::class, 'store'])->name('biodata.store');

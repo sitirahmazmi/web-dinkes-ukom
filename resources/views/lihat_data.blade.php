@@ -8,56 +8,92 @@
             <div class="col-3">
                 <div class="align-items-center">
                     <h2>Lihat Data</h2>
-                    {{-- <a href="{{ route('siti.create') }}" class="btn btn-primary">Tambah Data</a> --}}
-                </div>
+                </div>  
                 @if (session()->has('pesan'))
                     <div class="alert alert-success">{{ session()->get('pesan') }}</div>
                 @endif
-                <table class="table">
-                    <tr>
-                        <thead class="header">
-                            <td>No</td>
-                            <td>Nama</td>
-                            <td>NIP</td>
-                            <td>Unit Kerja</td>
-                            <td>Kabupaten/Kota</td>
-                            <td>Jenis Jabatan Fungsional</td>
-                            <td>Kategori</td>
-                            <td>Jenjang Saat Ini</td>
-                            <td>Jenjang yang Akan Diduduki</td>
-                            <td>Nomor WhatsApp</td>
-                            <td>Email</td>
-                            <td>nomor sk pangkat terakhir</td>
-                            <td>tanggal sk pangkat terakhir</td>
-                            <td>nomor sk fungsional terakhir</td>
-                            <td>tanggal sk fungsional terakhir</td>
-                            <td>nomor sk atau surat pencantuman gelar</td>
-                            <td>tanggal sk atau surat pencantuman gelar</td>
-                            <td>nomor ijazah terakhir</td>
-                            <td>tanggal ijazah terakhir</td>
-                        </thead>
-                        <tbody>
+                <table class="table table-striped">
+                    <thead class="header">
+                            <tr>
+                                <th>Biodata</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                            </tr>
+                    </thead>
+                        
                             @forelse ($data as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>Nama</td>
                                     <td>{{ $item->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td>NIP</td>
                                     <td>{{ $item->nip }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Unit Kerja</td>
                                     <td>{{ $item->unit_kerja }}</td>
-                                    <td>{{ $item->kab_kota }}</td>
+                                </tr>
+                                <tr>
+                                    <td >Kabupaten/Kota</td>
+                                    <td >{{ $item->kab_kota }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Jabatan Fungsional</td>
                                     <td>{{ $item->jenis_jabatan_fungsional }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Kategori</td>
                                     <td>{{ $item->kategori }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Jenjang Saat Ini</td>
                                     <td>{{ $item->jenjang_saat_ini }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Jenjang yang Akan Diduduki</td>
                                     <td>{{ $item->jenjang_akan_diduduki }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nomor WhatsApp</td>
                                     <td>{{ $item->nomor_wa }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
                                     <td>{{ $item->email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nomor SK Pangkat Terakhir</td>
                                     <td>{{ $item->no_sk_pangkat_terakhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal SK Pangkat Terakhir</td>
                                     <td>{{ $item->tgl_sk_pangkat_terakhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nomor SK Fungsional Terakhir</td>
                                     <td>{{ $item->no_sk_fungsional_terakhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal SK Fungsional Terakhir</td>
                                     <td>{{ $item->tgl_sk_fungsional_terakhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nomor SK Pencantuman Gelar</td>
                                     <td>{{ $item->no_sk_pencatuman_gelar }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal SK Pencantuman Gelar</td>
                                     <td>{{ $item->tgl_sk_pencatuman_gelar }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nomor Ijazah Terakhir</td>
                                     <td>{{ $item->no_ijazah_terakhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Ijazah Terakhir</td>
                                     <td>{{ $item->tgl_ijazah_terakhir }}</td>
+                                </tr>
                                     {{-- <td><form method="POST" action="{{ route('siti.hapus', ['sitis'=> $item->id]) }}">
                                         @method('DELETE') --}}
                                         {{-- @csrf
@@ -82,3 +118,4 @@
     </h1>
 </body>
 @endsection
+@section('footer')

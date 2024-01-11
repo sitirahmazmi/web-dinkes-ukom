@@ -32,6 +32,9 @@ class UserController extends Controller
     public function input() {
         return view('form_biodata');
     }
+    public function dashboardUser() {
+        return view('dashboard_peserta');
+    }
 
     public function store(Request $request, Biodata $biodatas) 
     {
