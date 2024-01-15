@@ -11,11 +11,7 @@ return new class extends Migration
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->enum('file_name', ['SK Pangkat Terakhir', 'SK Fungsional Terakhir',
-            'SK atau Surat Pencantuman Gelar', 'Ijazah Terakhir', 'Surat Tanda Registrasi (STR)',
-            'Surat Izin Praktik (SIP)', 'Surat Rekomendasi', 'Portofolio', 'Sasaran Kerja Pegawai (SKP)']);
-            $table->string('file_path');
-            $table->integer('file_version')->default(1);
+            $table->string('filename');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();

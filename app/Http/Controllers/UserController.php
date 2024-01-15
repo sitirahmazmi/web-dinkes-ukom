@@ -84,7 +84,7 @@ class UserController extends Controller
                     'tgl_ijazah_terakhir' => $request->tgl_ijazah_terakhir
                 ]);
 
-                return redirect()->route('home')->with('success', 'Biodata created successfully!');
+                return view('dashboard_peserta');
                
         } else {
             // Handle the case where the user is not authenticated
@@ -124,7 +124,8 @@ class UserController extends Controller
     }
 
     public function editBiodata($biodatas) {
-        $result = Biodata::where('id',$biodatas)->first();
+        //$result = Biodata::where('id',$biodatas)->first();
+        $result = Biodata::all();
         return view('edit_biodata')->with('biodata', $result);
     }
 
@@ -146,29 +147,29 @@ class UserController extends Controller
     // }
     public function uploadFile()
     {
+        $fileTypes = ['SK Pangkat Terakhir', 'SK Fungsional Terakhir', /* ... other file types ... */];
         return view('form_upload');
     }
 
     public function storeFile(Request $request)
     {
-        $user_id = auth()->user()->id;
+        $user = auth()->user();
+        $uploads = [];
 
         $request->validate([
-            'file' => 'required|ends_with:pdf,doc,docx|allowed_file_extension|max:10240', // Contoh: Hanya izinkan file PDF, DOC, atau DOCX dengan ukuran maksimal 10MB
+            'files.*' => 'required|ends_with:pdf,doc,docx|allowed_file_extension|max:10240', // Contoh: Hanya izinkan file PDF, DOC, atau DOCX dengan ukuran maksimal 10MB
         ]);
 
         foreach ($request->file('files') as $file) {
-            $upload = Upload::create([
-                'user_id' => $user_id,
-                'file_name' => $file->getClientOriginalName(),
-                'file_path' => $file->store('uploads'),
-                'file_version' => Upload::where('user_id', $user_id)
-                    ->where('file_name', $file->getClientOriginalName())
-                    ->max('file_version') + 1,
+            $filename = $file->store('uploads'); // 'uploads' is the storage folder, adjust as needed
+
+            $user->files()->create([
+                'filename' => $filename,
+                'file_path' => $filename,
             ]);
         }
-        dump($upload);
-        // return redirect()->route('uploads.index')->with('success', 'Files uploaded successfully.');
+
+        return redirect()->route('form_upload')->with('success', 'Files uploaded successfully.');
     }
     // public function fileUpload(Request $request){
     //     if (auth()->check()) {
@@ -277,9 +278,31 @@ class UserController extends Controller
     //         }
     //     }
     // }
+    // public function editFile()
+    // {
+    //     $user = auth()->user();
+    //     $files = $user->files;
+
+    //     return view('files.edit', compact('files'));
+    // }
     
-    public function editUpload($uploads) {
-        $result = Upload::where('id',$uploads)->first();
-        return view('edit_upload')->with('upload', $result);
-    }
+    // public function updateFile(Request $request)
+    // {
+    //     $request->validate([
+    //         'files.*' => 'required|mimes:pdf,docx|max:2048',
+    //     ]);
+
+    //     $user = auth()->user();
+
+    //     foreach ($request->file('files') as $file) {
+    //         $filename = $file->store('uploads');
+
+    //         $user->files()->updateOrCreate(
+    //             ['filename' => $filename],
+    //             ['file_path' => $filename]
+    //         );
+    //     }
+
+    //     return redirect()->route('uploads.update')->with('success', 'Files updated successfully.');
+    // }
 }

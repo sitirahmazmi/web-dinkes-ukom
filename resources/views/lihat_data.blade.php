@@ -5,14 +5,18 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col">
                 <div class="align-items-center">
                     <h2>Lihat Data</h2>
+                </div>  
+                <div class="align-items-right">
+                    <a href="{{ route('biodata.edit') }}" class="btn btn-primary" role="button">Edit Biodata</a>
+                    <a href="{{ route('biodata.edit') }}" class="btn btn-primary" role="button">Edit File</a>
                 </div>  
                 @if (session()->has('pesan'))
                     <div class="alert alert-success">{{ session()->get('pesan') }}</div>
                 @endif
-                <table class="table table-striped">
+                <table border="1" class="table table-striped" >
                     <thead class="header">
                             <tr>
                                 <th>Biodata</th>

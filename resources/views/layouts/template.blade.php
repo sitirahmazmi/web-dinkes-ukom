@@ -42,7 +42,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{asset('/')}}/template/index3.html" class="nav-link">Home</a>
+        <a href="" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -120,7 +120,7 @@
   <!-- Brand Logo -->
   <a href="" class="brand-link">
     <img src="{{asset('/')}}/template/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">ARUMA</span>
+    <span class="brand-text font-weight-light">ARUMI</span>
   </a>
 
   <!-- Sidebar -->
@@ -154,7 +154,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item">
           <a href="{{ url('/user/dashboard') }}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
+            <i class="nav-icon fas fa-home"></i>
             <p>
               Dashboard
             </p>
@@ -162,15 +162,15 @@
         </li>
         <li class="nav-item">
           <a href="{{ route('biodata') }}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
+            <img src="{{ asset('img/biodata.png') }}" class="nav-icon">
             <p>
               Form Biodata
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('uploads.create') }}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
+          <a href="{{ url('/uploadCoba') }}" class="nav-link">
+            <img src="{{ asset('img/upload_file.png') }}" class="nav-icon">
             <p>
               Upload File
             </p>
@@ -178,15 +178,15 @@
         </li>
         <li class="nav-item">
           <a href="{{ url('/user/lihatData') }}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
+            <img src="{{ asset('img/lihat_data.png') }}" class="nav-icon">
             <p>
               Lihat Data
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/') }}" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
+          <a href="{{ route('logout') }}" class="nav-link">
+            <i class="nav-icon fas fa-sign-out-alt"></i>
             <p>
               Logout
             </p>
@@ -208,9 +208,9 @@
   <footer class="main-footer">
     <strong>Copyright &copy; 2024 <a href="https://dinkes.kalbarprov.go.id/">Dinas Kesehatan Provinsi Kalimantan Barat</a>.</strong>
     All rights reserved.
-    {{-- <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div> --}}
+    <div class="float-right d-none d-sm-inline-block">
+      <b>ARUMI</b>
+    </div>
   </footer>
 
   <!-- Control Sidebar -->

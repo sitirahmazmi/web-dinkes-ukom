@@ -31,9 +31,7 @@
             @endif
 
             <!-- Repeat this block for each file input -->
-            @foreach(['SK Pangkat Terakhir', 'SK Fungsional Terakhir', 'SK atau Surat Pencantuman Gelar',
-                'Ijazah Terakhir', 'Surat Tanda Registrasi (STR)', 'Surat Izin Praktik (SIP)', 'Surat Rekomendasi',
-                'Portofolio', 'Sasaran Kerja Pegawai (SKP)'] as $fileType)
+            @foreach($fileTypes as $fileType)
             <div class="mb-3">
                 <label for="{{ strtolower(str_replace(' ', '_', $fileType)) }}" class="form-label">{{ $fileType }}</label>
                 <div class="custom-file">

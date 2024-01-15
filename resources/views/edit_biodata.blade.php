@@ -7,11 +7,11 @@
         <div class="col-md-8 col-xl-6">
             <h1>Form Biodata</h1>
             <hr>
-            <form action="{{ route('biodata.store') }}" method="POST">
+            <form action="{{ route('biodata.update') }}" method="POST">
             @csrf
                 <div class="mb-3">
                     <label class="form-label" for="nama">Nama Lengkap</label>
-                    <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
+                    <input type="text" id="nama" name="nama" value="{{ $biodata->nama }}"
                     class="form-control @error('nama') is-invalid @enderror">
             @error('nama')
                 <div class="text-danger">{{ $message }}</div>
@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="nip">NIP</label>
-            <input type="text" id="nip" name="nip" value="{{ old('nip') }}"
+            <input type="text" id="nip" name="nip" value="{{ $biodata->nip }}"
             class="form-control @error('nip') is-invalid @enderror">
             @error('nip')
                 <div class="text-danger">{{ $message }}</div>
@@ -27,7 +27,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="unit_kerja">Unit Kerja</label>
-            <input type="text" id="unit_kerja" name="unit_kerja" value="{{ old('unit_kerja') }}"
+            <input type="text" id="unit_kerja" name="unit_kerja" value="{{ $biodata->unit_kerja }}"
             class="form-control @error('unit_kerja') is-invalid @enderror">
             @error('unit_kerja')
                 <div class="text-danger">{{ $message }}</div>
@@ -35,7 +35,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="kab_kota">Kabupaten/Kota</label>
-            <select class="form-select" name="kab_kota" id="kab_kota" value="{{ old('kab_kota') }}">
+            <select class="form-select" name="kab_kota" id="kab_kota" value="{{ $biodata->kab_kota }}">
                 <option value="Kabupaten Sambas" {{ old('kab_kota')=='Kabupaten Sambas' ? 'selected': '' }}>
                 Kabupaten Sambas
                 </option>
@@ -85,7 +85,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="jenis_jabatan_fungsional">Jenis Jabatan Fungsional</label>
-            <select class="form-select" name="jenis_jabatan_fungsional" id="jenis_jabatan_fungsional" value="{{ old('jenis_jabatan_fungsional') }}">
+            <select class="form-select" name="jenis_jabatan_fungsional" id="jenis_jabatan_fungsional" value="{{ $biodata->jenis_jabatan_fungsional }}">
                 <option value="Jabatan Fungsional Administrator Kesehatan" {{ old('jenis_jabatan_fungsional')=='Jabatan Fungsional Administrator Kesehatan' ? 'selected': '' }}>
                 Jabatan Fungsional Administrator Kesehatan
                 </option>
@@ -161,12 +161,12 @@
             <label class="form-label">Kategori</label>
             <div class="d-flex">
             <div class="form-check me-3">
-                <input class="form-check-input" type="radio" name="kategori" id="keterampilan" value="keterampilan"
+                <input class="form-check-input" type="radio" name="kategori" id="keterampilan" value={{ $biodata->kategori }}
                 {{ old('kategori')=='keterampilan' ? 'checked': '' }}>
                 <label class="form-check-label" for="keterampilan">Keterampilan</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="kategori" id="keahlian" value="keahlian"
+                <input class="form-check-input" type="radio" name="kategori" id="keahlian" value={{ $biodata->kategori }}
                 {{ old('kategori')=='keahlian' ? 'checked': '' }}>
                 <label class="form-check-label" for="keahlian">Keahlian</label>
             </div>
@@ -177,7 +177,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="jenjang_saat_ini">Jenjang Saat ini</label>
-            <select class="form-select" name="jenjang_saat_ini" id="jenjang_saat_ini" value="{{ old('jenjang_saat_ini') }}">
+            <select class="form-select" name="jenjang_saat_ini" id="jenjang_saat_ini" value="{{ $biodata->jenjang_saat_ini }}">
                 <option value="JFU" {{ old('jenjang_saat_ini')=='JFU' ? 'selected': '' }}>
                 JFU
                 </option>
@@ -203,7 +203,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="jenjang_akan_diduduki">Jenjang yang Akan Diduduki</label>
-            <select class="form-select" name="jenjang_akan_diduduki" id="jenjang_akan_diduduki" value="{{ old('jenjang_akan_diduduki') }}">
+            <select class="form-select" name="jenjang_akan_diduduki" id="jenjang_akan_diduduki" value="{{ $biodata->jenjang_akan_diduduki }}">
                 <option value="Mahir/Pelaksana Lanjutan" {{ old('jenjang_akan_diduduki')=='Mahir/Pelaksana Lanjutan' ? 'selected': '' }}>
                 Mahir/Pelaksana Lanjutan
                 </option>
@@ -226,7 +226,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="nomor_wa">Nomor WhatsApp</label>
-            <input type="text" id="nomor_wa" name="nomor_wa" value="{{ old('nomor_wa') }}"
+            <input type="text" id="nomor_wa" name="nomor_wa" value="{{ $biodata->nomor_wa }}"
             class="form-control @error('nomor_wa') is-invalid @enderror">
             @error('nomor_wa')
                 <div class="text-danger">{{ $message }}</div>
@@ -234,7 +234,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="email">Email</label>
-            <input type="text" id="email" name="email" value="{{ old('email') }}"
+            <input type="text" id="email" name="email" value="{{ $biodata->email }}"
             class="form-control @error('email') is-invalid @enderror">
             @error('email')
                 <div class="text-danger">{{ $message }}</div>
@@ -242,7 +242,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="no_sk_pangkat_terakhir">Nomor SK Pangkat Terakhir</label>
-            <input type="text" id="no_sk_pangkat_terakhir" name="no_sk_pangkat_terakhir" value="{{ old('no_sk_pangkat_terakhir') }}"
+            <input type="text" id="no_sk_pangkat_terakhir" name="no_sk_pangkat_terakhir" value="{{ $biodata->no_sk_pangkat_terakhir }}"
             class="form-control @error('no_sk_pangkat_terakhir') is-invalid @enderror">
             @error('no_sk_pangkat_terakhir')
                 <div class="text-danger">{{ $message }}</div>
@@ -250,7 +250,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="tgl_sk_pangkat_terakhir">Tanggal SK Pangkat Terakhir</label>
-            <input type="date" id="tgl_sk_pangkat_terakhir" name="tgl_sk_pangkat_terakhir" value="{{ old('tgl_sk_pangkat_terakhir') }}"
+            <input type="date" id="tgl_sk_pangkat_terakhir" name="tgl_sk_pangkat_terakhir" value="{{ $biodata->tgl_sk_pangkat_terakhir }}"
             class="form-control @error('tgl_sk_pangkat_terakhir') is-invalid @enderror">
             @error('tgl_sk_pangkat_terakhir')
                 <div class="text-danger">{{ $message }}</div>
@@ -258,7 +258,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="no_sk_fungsional_terakhir">Nomor SK Fungsional Terakhir</label>
-            <input type="text" id="no_sk_fungsional_terakhir" name="no_sk_fungsional_terakhir" value="{{ old('no_sk_fungsional_terakhir') }}"
+            <input type="text" id="no_sk_fungsional_terakhir" name="no_sk_fungsional_terakhir" value="{{ $biodata->no_sk_fungsional_terakhir }}"
             class="form-control @error('no_sk_fungsional_terakhir') is-invalid @enderror">
             @error('no_sk_fungsional_terakhir')
                 <div class="text-danger">{{ $message }}</div>
@@ -266,7 +266,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="tgl_sk_fungsional_terakhir">Tanggal SK Fungsional Terakhir</label>
-            <input type="date" id="tgl_sk_fungsional_terakhir" name="tgl_sk_fungsional_terakhir" value="{{ old('tgl_sk_fungsional_terakhir') }}"
+            <input type="date" id="tgl_sk_fungsional_terakhir" name="tgl_sk_fungsional_terakhir" value="{{ $biodata->tgl_sk_fungsional_terakhir }}"
             class="form-control @error('tgl_sk_fungsional_terakhir') is-invalid @enderror">
             @error('tgl_sk_fungsional_terakhir')
                 <div class="text-danger">{{ $message }}</div>
@@ -274,7 +274,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="no_sk_pencatuman_gelar">Nomor SK atau Surat Pencantuman Gelar</label>
-            <input type="text" id="no_sk_pencatuman_gelar" name="no_sk_pencatuman_gelar" value="{{ old('no_sk_pencatuman_gelar') }}"
+            <input type="text" id="no_sk_pencatuman_gelar" name="no_sk_pencatuman_gelar" value="{{ $biodata->no_sk_pencatuman_gelar }}"
             class="form-control @error('no_sk_pencatuman_gelar') is-invalid @enderror">
             @error('no_sk_pencatuman_gelar')
                 <div class="text-danger">{{ $message }}</div>
@@ -282,7 +282,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="tgl_sk_pencatuman_gelar">Tanggal SK atau Surat Pencantuman Gelar</label>
-            <input type="date" id="tgl_sk_pencatuman_gelar" name="tgl_sk_pencatuman_gelar" value="{{ old('tgl_sk_pencatuman_gelar') }}"
+            <input type="date" id="tgl_sk_pencatuman_gelar" name="tgl_sk_pencatuman_gelar" value="{{ $biodata->tgl_sk_pencatuman_gelar }}"
             class="form-control @error('tgl_sk_pencatuman_gelar') is-invalid @enderror">
             @error('tgl_sk_pencatuman_gelar')
                 <div class="text-danger">{{ $message }}</div>
@@ -290,7 +290,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="no_ijazah_terakhir">Nomor Ijazah Terakhir</label>
-            <input type="text" id="no_ijazah_terakhir" name="no_ijazah_terakhir" value="{{ old('no_ijazah_terakhir') }}"
+            <input type="text" id="no_ijazah_terakhir" name="no_ijazah_terakhir" value="{{ $biodata->no_ijazah_terakhir }}"
             class="form-control @error('no_ijazah_terakhir') is-invalid @enderror">
             @error('no_ijazah_terakhir')
                 <div class="text-danger">{{ $message }}</div>
@@ -298,7 +298,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="tgl_ijazah_terakhir">Tanggal Ijazah Terakhir</label>
-            <input type="date" id="tgl_ijazah_terakhir" name="tgl_ijazah_terakhir" value="{{ old('tgl_ijazah_terakhir') }}"
+            <input type="date" id="tgl_ijazah_terakhir" name="tgl_ijazah_terakhir" value="{{ $biodata->tgl_ijazah_terakhir }}"
             class="form-control @error('tgl_ijazah_terakhir') is-invalid @enderror">
             @error('tgl_ijazah_terakhir')
                 <div class="text-danger">{{ $message }}</div>

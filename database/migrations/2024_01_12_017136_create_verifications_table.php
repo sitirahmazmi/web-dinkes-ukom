@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('biodata_id');
             $table->unsignedBigInteger('upload_id');
-            $table->enum('status',['komplit','belum komplit']);
+            $table->enum('status',['Diproses', 'Komplit','Perbaikan']);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
