@@ -112,6 +112,76 @@
                         </tbody>
                     </tr>
                 </table>
+                <br>
+                <table border="1" class="table table-striped" >
+                    <thead class="header">
+                            <tr>
+                                <th>Dokumen</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                            </tr>
+                    </thead>
+                        
+                            @forelse ($files as $item)
+                                <tr>
+                                    <td>SK Pangkat Terakhir</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sk_pangkat_terakhir }}">Lihat</a>
+                                        <br>{{ $item->sk_pangkat_terakhir }}</td> 
+                                </tr>
+                                <tr>
+                                    <td>SK Fungsional Terakhir</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sk_fungsional_terakhir }}">Lihat</a>
+                                        <br>{{ $item->sk_fungsional_terakhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td>SK atau Surat Pencantuman Gelar</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sk_pencantuman_gelar }}">Lihat</a>
+                                        <br>{{ $item->sk_pencantuman_gelar }}</td>
+                                </tr>
+                                <tr>
+                                    <td >Ijazah Terakhir</td>
+                                    <td ><a href="{{asset('/')}}upload_file_peserta/{{ $item->ijazah_terakhir }}">Lihat</a>
+                                        <br>{{ $item->ijazah_terakhir }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Surat Tanda Registrasi (STR)</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->str }}">Lihat</a>
+                                        <br>{{ $item->str }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Surat Izin Praktik (SIP)</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sip }}">Lihat</a>
+                                        <br>{{ $item->sip }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Surat Rekomendasi</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->surat_rekomendasi }}">Lihat</a>
+                                        <br>{{ $item->surat_rekomendasi }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Portofolio</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->portofolio }}">Lihat</a>
+                                        <br>{{ $item->portofolio }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sasaran Kerja Pegawai (SKP)</td>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->skp }}">Lihat</a>
+                                        <br>{{ $item->skp }}</td>
+                                </tr>
+                                    {{-- <td><form method="POST" action="{{ route('siti.hapus', ['sitis'=> $item->id]) }}">
+                                        @method('DELETE') --}}
+                                        {{-- @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm" role="button">Hapus</button>
+                                        <a class="btn btn-success btn-sm" href="{{ url('/edit-siti/'.$item->id).'/edit' }}" role="button">Edit</a> --}}
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                Data Kosong
+                            @endforelse
+                        </tbody>
+                    </tr>
+                </table>
             </div>
         </div>
         </table>

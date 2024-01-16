@@ -11,6 +11,7 @@ use App\Models\FileType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class UserController extends Controller
 {
@@ -80,8 +81,15 @@ class UserController extends Controller
 
     public function lihatData() 
     {
-        $result = Biodata::all();
-        return view('lihat_data')->with('data', $result);
+        // Retrieve the currently authenticated user
+        $user = Auth::user();
+
+        // Retrieve the biodata for the authenticated user only
+        $result = Biodata::where('user_id', $user->id)->get();
+
+        $files = File::where('user_id', $user->id)->get();
+
+        return view('lihat_data')->with(['data' => $result, 'files' => $files]);
     }
 
     public function updateBiodata(Request $form, Biodata $biodatas) 
@@ -114,182 +122,5 @@ class UserController extends Controller
         $result = Biodata::all();
         return view('edit_biodata')->with('biodata', $result);
     }
-
-    public function createUpload(){
-        return view('form_upload');
-    }
-
-    // public function indexFile()
-    // {
-    //     // Retrieve all uploads for display
-    //     $uploads = Upload::all();
-
-    //     return view('uploads.index', compact('uploads'));
-    // }
-
-    // public function createFile()
-    // {
-    //     return view('uploads.create');
-    // }
-    
-    public function uploadFile()
-    {
-        $fileTypes = ['SK Pangkat Terakhir', 'SK Fungsional Terakhir', /* ... other file types ... */];
-        return view('form_upload');
-    }
-
-    public function storeFile(Request $request)
-    {
-        $user = auth()->user();
-        $uploads = [];
-
-        $request->validate([
-            'files.*' => 'required|ends_with:pdf,doc,docx|allowed_file_extension|max:10240', // Contoh: Hanya izinkan file PDF, DOC, atau DOCX dengan ukuran maksimal 10MB
-        ]);
-
-        foreach ($request->file('files') as $file) {
-            $filename = $file->store('uploads'); // 'uploads' is the storage folder, adjust as needed
-
-            $user->files()->create([
-                'filename' => $filename,
-                'file_path' => $filename,
-            ]);
-        }
-
-        return redirect()->route('form_upload')->with('success', 'Files uploaded successfully.');
-    }
-    // public function fileUpload(Request $request){
-    //     if (auth()->check()) {
-    //         // Validasi request
-    //         $request->validate([
-    //             'sk_pangkat_terakhir' => 'required',
-    //             //'file_path_sk_pangkat_terakhir' => 'required',
-    //             'sk_fungsional_terakhir' => 'required',
-    //             //'file_path_sk_fungsional_terakhir' => 'required',
-    //             'sk_pencantuman_gelar' => 'required',
-    //             //'file_path_sk_pencantuman_gelar' => 'required',
-    //             'ijazah_terakhir' => 'required',
-    //             //'file_path_ijazah_terakhir' => 'required',
-    //             'str' => 'required',
-    //             //'file_path_str' => 'required',
-    //             'sip' => 'required',
-    //             //'file_path_sip' => 'required',
-    //             'surat_rekomendasi' => 'required',
-    //             //'file_path_surat_rekomendasi' => 'required',
-    //             'portofolio' => 'required',
-    //             //'file_path_portofolio' => 'required',
-    //             'skp' => 'required',
-    //             //'file_path_skp' => 'required',
-
-    //         ]);
-
-    //         $user_id = auth()->user()->id;
-
-    //         // Simpan file ke storage
-    //         $filePath = $request->file('sk_pangkat_terakhir')->store('uploads');
-    //         $filePath = $request->file('sk_fungsional_terakhir')->store('uploads');
-    //         $filePath = $request->file('sk_pencantuman_gelar')->store('uploads');
-    //         $filePath = $request->file('ijazah_terakhir')->store('uploads');
-    //         $filePath = $request->file('str')->store('uploads');
-    //         $filePath = $request->file('sip')->store('uploads');
-    //         $filePath = $request->file('surat_rekomendasi')->store('uploads');
-    //         $filePath = $request->file('portofolio')->store('uploads');
-    //         $filePath = $request->file('skp')->store('uploads');
-            
-
-    //         // Simpan data ke database
-    //         $upload = new Upload([
-    //             'user_id' => $user_id,
-    //             'sk_pangkat_terakhir' => $request->input('sk_pangkat_terakhir'),
-    //             'file_path_sk_pangkat_terakhir' => $filePath,
-    //             'sk_fungsional_terakhir' => $request->input('sk_fungsional_terakhir'),
-    //             'file_path_sk_fungsional_terakhir' => $filePath,
-    //             'sk_pencantuman_gelar' => $request->input('sk_pencantuman_gelar'),
-    //             'file_path_sk_pencantuman_gelar' => $filePath,
-    //             'ijazah_terakhir' => $request->input('ijazah_terakhir'),
-    //             'file_path_ijazah_terakhir' => $filePath,
-    //             'str' => $request->input('str'),
-    //             'file_path_str' => $filePath,
-    //             'sip' => $request->input('sip'),
-    //             'file_path_sip' => $filePath,
-    //             'surat_rekomendasi' => $request->input('surat_rekomendasi'),
-    //             'file_path_surat_rekomendasi' => $filePath,
-    //             'portofolio' => $request->input('portofolio'),
-    //             'file_path_portofolio' => $filePath,
-    //             'skp' => $request->input('skp'),
-    //             'file_path_skp' => $filePath,
-                
-    //         ]);
-
-    //         $upload->save();
-
-    //                 return back()
-    //                 ->with('success','File has been uploaded.')
-    //                 ->with('file', $fileName);
-                
-    //     }
-    // }
-    // public function fileUpload(Request $req){
-    //     if (auth()->check()) {
-    //         $req->validate([
-    //             'file' => 'required|mimes:csv,txt,doc,docx
-    //             ,xlx,xls,pdf|max:3072'
-    //         ]);
-    //         $fileModel = new Upload;
-    //         if($req->file()) {
-    //             $user_id = auth()->user()->id;
-    //             $fileName = time().'_'.$req->file->getClientOriginalName();
-    //             $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
-    //             $fileModel->sk_pangkat_terakhir = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_sk_pangkat_terakhir = '/storage/' . $filePath;
-    //             $fileModel->sk_fungsional_terakhir = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_sk_fungsional_terakhir = '/storage/' . $filePath;
-    //             $fileModel->sk_pencantuman_gelar = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_sk_pencantuman_gelar = '/storage/' . $filePath;
-    //             $fileModel->ijazah_terakhir = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_ijazah_terakhir = '/storage/' . $filePath;
-    //             $fileModel->str = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_str = '/storage/' . $filePath;
-    //             $fileModel->sip = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_sip = '/storage/' . $filePath;
-    //             $fileModel->surat_rekomendasi = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_surat_rekomendasi = '/storage/' . $filePath;
-    //             $fileModel->portofolio = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_portofolio = '/storage/' . $filePath;
-    //             $fileModel->skp = time().'_'.$req->file->getClientOriginalName();
-    //             $fileModel->file_path_skp = '/storage/' . $filePath;
-    //             $fileModel->save();
-    //             return back()
-    //             ->with('success','File has been uploaded.')
-    //             ->with('file', $fileName);
-    //         }
-    //     }
-    // }
-    // public function editFile()
-    // {
-    //     $user = auth()->user();
-    //     $files = $user->files;
-
-    //     return view('files.edit', compact('files'));
-    // }
-    
-    // public function updateFile(Request $request)
-    // {
-    //     $request->validate([
-    //         'files.*' => 'required|mimes:pdf,docx|max:2048',
-    //     ]);
-
-    //     $user = auth()->user();
-
-    //     foreach ($request->file('files') as $file) {
-    //         $filename = $file->store('uploads');
-
-    //         $user->files()->updateOrCreate(
-    //             ['filename' => $filename],
-    //             ['file_path' => $filename]
-    //         );
-    //     }
-
-    //     return redirect()->route('uploads.update')->with('success', 'Files updated successfully.');
-    // }
+   
 }
