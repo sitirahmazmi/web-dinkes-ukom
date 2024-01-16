@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('biodata_id');
-            $table->unsignedBigInteger('upload_id');
+            $table->unsignedBigInteger('file_id');
             $table->enum('status',['Diproses', 'Komplit','Perbaikan']);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('biodata_id')->references('id')->on('biodatas')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('upload_id')->references('id')->on('uploads')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('file_id')->references('id')->on('files')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

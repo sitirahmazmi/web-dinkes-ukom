@@ -14,20 +14,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function insert() {
-        $result = User::create(
-            [
-                'nip' => '012345',
-                'password' => '012345'
-            ]
-        );
-        dump($result);
-    }
-
-    public function dashboard() {
-        dd(auth()->user());
-        return view('dashboard_user');
-    }
 
     public function input() {
         return view('form_biodata');
@@ -145,6 +131,7 @@ class UserController extends Controller
     // {
     //     return view('uploads.create');
     // }
+    
     public function uploadFile()
     {
         $fileTypes = ['SK Pangkat Terakhir', 'SK Fungsional Terakhir', /* ... other file types ... */];

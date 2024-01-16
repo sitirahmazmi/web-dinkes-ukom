@@ -8,75 +8,59 @@ class FileController extends Controller
 {
     public function store(Request $request)
     {
-       $request->validate([
-        'sk_pangkat_terakhir' => 'required:max:255',
-        'overview_sk_pangkat_terakhir' => 'required',
-        'sk_fungsional_terakhir' => 'required:max:255',
-        'overview_sk_fungsional_terakhir' => 'required',
-        'sk_pencantuman_gelar' => 'required:max:255',
-        'overview_sk_pencantuman_gelar' => 'required',
-        'ijazah_terakhir' => 'required:max:255',
-        'overview_ijazah_terakhir' => 'required',
-        'str' => 'required:max:255',
-        'overview_str' => 'required',
-        'sip' => 'required:max:255',
-        'overview_sip' => 'required',
-        'surat_rekomendasi' => 'required:max:255',
-        'overview_surat_rekomendasi' => 'required',
-        'portofolio' => 'required:max:255',
-        'overview_portofolio' => 'required',
-        'skp' => 'required:max:255',
-        'overview_skp' => 'required',
-      ]);
-
-      auth()->user()->files()->create([
-        'sk_pangkat_terakhir' => $request->get('sk_pangkat_terakhir'),
-        'overview_sk_pangkat_terakhir' => $request->get('overview_sk_pangkat_terakhir'),
-        'sk_fungsional_terakhir' => $request->get('sk_fungsional_terakhir'),
-        'overview_sk_fungsional_terakhir' => $request->get('overview_sk_fungsional_terakhir'),
-        'sk_pencantuman_gelar' => $request->get('sk_pencantuman_gelar'),
-        'overview_sk_pencantuman_gelar' => $request->get('overview_sk_pencantuman_gelar'),
-        'ijazah_terakhir' => $request->get('ijazah_terakhir'),
-        'overview_ijazah_terakhir' => $request->get('overview_ijazah_terakhir'),
-        'str' => $request->get('str'),
-        'overview_str' => $request->get('overview_str'),
-        'sip' => $request->get('sip'),
-        'overview_sip' => $request->get('overview_sip'),
-        'surat_rekomendasi' => $request->get('surat_rekomendasi'),
-        'overview_surat_rekomendasi' => $request->get('overview_surat_rekomendasi'),
-        'portofolio' => $request->get('portofolio'),
-        'overview_portofolio' => $request->get('overview_portofolio'),
-        'skp' => $request->get('skp'),
-        'overview_skp' => $request->get('overview_skp'),
-      ]);
-
-      return back()->with('message', 'Your file is submitted Successfully');
-    }
-
-    public function upload()
-    {
-      $uploadedFile = $request->file('file');
-      $filename = time().$uploadedFile->getClientOriginalName();
-
-      Storage::disk('local')->putFileAs(
-        'files/'.$filename,
-        $uploadedFile,
-        $filename
-      );
-
-      $upload = new Upload;
-      $upload->filename = $filename;
-
-      $upload->user()->associate(auth()->user());
-
-      $upload->save();
-
-      return response()->json([
-        'id' => $upload->id
-      ]);
+      $user_id = auth()->user()->id;
+      $files = File::create($request->all());
+      if ($request->hasFile('sk_pangkat_terakhir')) {
+        $request->file('sk_pangkat_terakhir')->move('upload_file_peserta/',$request->file('sk_pangkat_terakhir')->getClientOriginalName());
+        $files->sk_pangkat_terakhir = $request->file('sk_pangkat_terakhir')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('sk_fungsional_terakhir')) {
+        $request->file('sk_fungsional_terakhir')->move('upload_file_peserta/',$request->file('sk_fungsional_terakhir')->getClientOriginalName());
+        $files->sk_fungsional_terakhir = $request->file('sk_fungsional_terakhir')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('sk_pencantuman_gelar')) {
+        $request->file('sk_pencantuman_gelar')->move('upload_file_peserta/',$request->file('sk_pencantuman_gelar')->getClientOriginalName());
+        $files->sk_pencantuman_gelar = $request->file('sk_pencantuman_gelar')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('ijazah_terakhir')) {
+        $request->file('ijazah_terakhir')->move('upload_file_peserta/',$request->file('ijazah_terakhir')->getClientOriginalName());
+        $files->ijazah_terakhir = $request->file('ijazah_terakhir')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('str')) {
+        $request->file('str')->move('upload_file_peserta/',$request->file('str')->getClientOriginalName());
+        $files->str = $request->file('str')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('sip')) {
+        $request->file('sip')->move('upload_file_peserta/',$request->file('sip')->getClientOriginalName());
+        $files->sip = $request->file('sip')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('surat_rekomendasi')) {
+        $request->file('surat_rekomendasi')->move('upload_file_peserta/',$request->file('surat_rekomendasi')->getClientOriginalName());
+        $files->surat_rekomendasi = $request->file('surat_rekomendasi')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('portofolio')) {
+        $request->file('portofolio')->move('upload_file_peserta/',$request->file('portofolio')->getClientOriginalName());
+        $files->portofolio = $request->file('portofolio')->getClientOriginalName();
+        $files->save;
+      }
+      if ($request->hasFile('skp')) {
+        $request->file('skp')->move('upload_file_peserta/',$request->file('skp')->getClientOriginalName());
+        $files->skp = $request->file('skp')->getClientOriginalName();
+        $files->save;
+      }
     }
 
     public function index() {
       return view('upload');
-  }
+    }
+    public function create() {
+      return view('uploads.create');
+    }
 }

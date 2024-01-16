@@ -169,7 +169,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/uploadCoba') }}" class="nav-link">
+          <a href="{{ route('uploads.create') }}" class="nav-link">
             <img src="{{ asset('img/upload_file.png') }}" class="nav-icon">
             <p>
               Upload File
