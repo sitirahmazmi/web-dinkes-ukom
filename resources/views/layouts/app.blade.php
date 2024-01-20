@@ -18,7 +18,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
+<body style="background-color: #648A4E;">
     @yield('navbar')
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

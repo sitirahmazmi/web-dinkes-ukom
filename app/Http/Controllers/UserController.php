@@ -114,12 +114,16 @@ class UserController extends Controller
             'tgl_ijazah_terakhir' => 'required'
         ]);
         $biodatas->update($result);
-        return redirect()->route('data_diri');
+        return redirect()->route('lihat.data');
     }
 
     public function editBiodata($biodatas) {
-        //$result = Biodata::where('id',$biodatas)->first();
-        $result = Biodata::all();
+        $result = Biodata::where('id',$biodatas)->first();
+        //  // Retrieve the currently authenticated user
+        //  $user = Auth::user();
+
+        //  // Retrieve the biodata for the authenticated user only
+        //  $result = Biodata::where('user_id', $user->id)->get();
         return view('edit_biodata')->with('biodata', $result);
     }
    

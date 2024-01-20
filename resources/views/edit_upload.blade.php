@@ -1,6 +1,6 @@
 @extends('layouts.template')
-@section('title','Edit Upload')
-@section('head','Upload')
+@section('title','Edit Dokumen')
+@section('head','Edit Dokumen')
 @section('content')
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 
 <body>
     <div class="container mt-5">
-        <form action="{{ route('uploads.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('/user/file/{id}') }}" method="POST" enctype="multipart/form-data">
             <h3 class="text-center mb-5">@yield('head')</h3>
             @csrf
 
@@ -31,9 +31,7 @@
             @endif
 
             <!-- Repeat this block for each file input -->
-            @foreach(['SK Pangkat Terakhir', 'SK Fungsional Terakhir', 'SK atau Surat Pencantuman Gelar',
-                'Ijazah Terakhir', 'Surat Tanda Registrasi (STR)', 'Surat Izin Praktik (SIP)', 'Surat Rekomendasi',
-                'Portofolio', 'Sasaran Kerja Pegawai (SKP)'] as $fileType)
+            @foreach($fileTypes as $fileType)
             <div class="mb-3">
                 <label for="{{ strtolower(str_replace(' ', '_', $fileType)) }}" class="form-label">{{ $fileType }}</label>
                 <div class="custom-file">
@@ -50,3 +48,4 @@
     </div>
 </body>
 @endsection
+@section('footer')

@@ -9,8 +9,8 @@ class FileController extends Controller
 {
     public function store(Request $request)
     {
-
-          $request->validate([
+        $request->validate([
+            // your validation rules here
             'sk_pangkat_terakhir' => 'required',
             'sk_fungsional_terakhir' => 'required',
             'sk_pencantuman_gelar' => 'required',
@@ -20,11 +20,17 @@ class FileController extends Controller
             'surat_rekomendasi' => 'required',
             'portofolio' => 'required',
             'skp' => 'required',
-          ]);
-        
-          $user_id = auth()->user()->id;
+        ]);
 
-          $files = File::create([
+        $user_id = auth()->user()->id;
+
+        // Create a folder for the user if it doesn't exist
+        $userFolderPath = public_path('upload_file_peserta/' . $user_id);
+        if (!file_exists($userFolderPath)) {
+            mkdir($userFolderPath, 0777, true);
+        }
+
+        $files = File::create([
             'user_id' => $user_id,
             'sk_pangkat_terakhir'   => '',
             'sk_fungsional_terakhir' => '',
@@ -35,51 +41,69 @@ class FileController extends Controller
             'surat_rekomendasi' => '',
             'portofolio' => '',
             'skp' => '',
-          ]);
-      
-      if ($request->hasFile('sk_pangkat_terakhir')) {
-        $request->file('sk_pangkat_terakhir')->move('upload_file_peserta/',$request->file('sk_pangkat_terakhir')->getClientOriginalName());
-        $files->sk_pangkat_terakhir = $request->file('sk_pangkat_terakhir')->getClientOriginalName();
-      }
-      if ($request->hasFile('sk_fungsional_terakhir')) {
-        $request->file('sk_fungsional_terakhir')->move('upload_file_peserta/',$request->file('sk_fungsional_terakhir')->getClientOriginalName());
-        $files->sk_fungsional_terakhir = $request->file('sk_fungsional_terakhir')->getClientOriginalName();
-      }
-      if ($request->hasFile('sk_pencantuman_gelar')) {
-        $request->file('sk_pencantuman_gelar')->move('upload_file_peserta/',$request->file('sk_pencantuman_gelar')->getClientOriginalName());
-        $files->sk_pencantuman_gelar = $request->file('sk_pencantuman_gelar')->getClientOriginalName();
-      }
-      if ($request->hasFile('ijazah_terakhir')) {
-        $request->file('ijazah_terakhir')->move('upload_file_peserta/',$request->file('ijazah_terakhir')->getClientOriginalName());
-        $files->ijazah_terakhir = $request->file('ijazah_terakhir')->getClientOriginalName();
-      }
-      if ($request->hasFile('str')) {
-        $request->file('str')->move('upload_file_peserta/',$request->file('str')->getClientOriginalName());
-        $files->str = $request->file('str')->getClientOriginalName();
-      }
-      if ($request->hasFile('sip')) {
-        $request->file('sip')->move('upload_file_peserta/',$request->file('sip')->getClientOriginalName());
-        $files->sip = $request->file('sip')->getClientOriginalName();
-      }
-      if ($request->hasFile('surat_rekomendasi')) {
-        $request->file('surat_rekomendasi')->move('upload_file_peserta/',$request->file('surat_rekomendasi')->getClientOriginalName());
-        $files->surat_rekomendasi = $request->file('surat_rekomendasi')->getClientOriginalName();
-      }
-      if ($request->hasFile('portofolio')) {
-        $request->file('portofolio')->move('upload_file_peserta/',$request->file('portofolio')->getClientOriginalName());
-        $files->portofolio = $request->file('portofolio')->getClientOriginalName();
-      }
-      if ($request->hasFile('skp')) {
-        $request->file('skp')->move('upload_file_peserta/',$request->file('skp')->getClientOriginalName());
-        $files->skp = $request->file('skp')->getClientOriginalName();
-      }
-      $files->save();
+        ]);
+
+        $this->moveAndSaveFile($request, 'sk_pangkat_terakhir', $files, $user_id);
+        $this->moveAndSaveFile($request, 'sk_fungsional_terakhir', $files, $user_id);
+        $this->moveAndSaveFile($request, 'sk_pencantuman_gelar', $files, $user_id);
+        $this->moveAndSaveFile($request, 'ijazah_terakhir', $files, $user_id);
+        $this->moveAndSaveFile($request, 'str', $files, $user_id);
+        $this->moveAndSaveFile($request, 'sip', $files, $user_id);
+        $this->moveAndSaveFile($request, 'surat_rekomendasi', $files, $user_id);
+        $this->moveAndSaveFile($request, 'portofolio', $files, $user_id);
+        $this->moveAndSaveFile($request, 'skp', $files, $user_id);
+        // Repeat for other file fields
+
+        $files->save();
     }
 
-    public function index() {
-      return view('upload');
+    private function moveAndSaveFile(Request $request, $fieldName, $files, $user_id)
+    {
+        if ($request->hasFile($fieldName)) {
+            $file = $request->file($fieldName);
+            $fileName = $file->getClientOriginalName();
+
+            // Move the file to the user's folder
+            $file->move("upload_file_peserta/$user_id", $fileName);
+
+            // Save the file name to the corresponding field in the database
+            $files->$fieldName = $fileName;
+        }
     }
-    public function create() {
-      return view('uploads.create');
+
+    public function index()
+    {
+        return view('upload');
+    }
+
+    public function create()
+    {
+        return view('uploads.create');
+    }
+
+    public function updateFile(Request $form, File $files) 
+    {
+        $result = $form->validate([
+            'sk_pangkat_terakhir' => 'required',
+            'sk_fungsional_terakhir' => 'required',
+            'sk_pencantuman_gelar' => 'required',
+            'ijazah_terakhir' => 'required',
+            'str' => 'required',
+            'sip' => 'required',
+            'portofolio' => 'required',
+            'skp' => 'required',
+        ]);
+        $files->update($result);
+        return redirect()->route('lihat.data');
+    }
+
+    public function editFile($files) {
+        $result = File::where('id',$files)->first();
+        //  // Retrieve the currently authenticated user
+        //  $user = Auth::user();
+
+        //  // Retrieve the biodata for the authenticated user only
+        //  $result = Biodata::where('user_id', $user->id)->get();
+        return view('edit_upload')->with('file', $result);
     }
 }

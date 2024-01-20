@@ -77,12 +77,15 @@ Route::get('/test', function(){
 Route::get('/uploadCoba', [FileController::class, 'index'])->name('home');
 Route::post('file/upload', [FileController::class,'store'])->name('upload');
 Route::get('/user/dashboard',[UserController::class, 'dashboardUser']);
-Route::get('/user/lihatData',[UserController::class, 'lihatData']);
+Route::get('/user/lihatData',[UserController::class, 'lihatData'])->name('lihat.data');
 Route::get('/user/biodata',[UserController::class, 'input'])->name('biodata');
 Route::post('/user/biodata/input',[UserController::class, 'store'])->name('biodata.store');
 Route::post('/user/biodata/{id}',[UserController::class, 'updateBiodata']);
 Route::get('/user/biodata/{id}',[UserController::class, 'updateBiodata'])->name('biodata.update');
-Route::get('/user/biodata/edit',[UserController::class, 'editBiodata'])->name('biodata.edit');
+Route::get('/user/biodata/{id}/edit',[UserController::class, 'editBiodata'])->name('biodata.edit');
+Route::post('/user/file/{id}',[FileController::class, 'updateFile']);
+Route::get('/user/file/{id}',[FileController::class, 'updateFile'])->name('file.update');
+Route::get('/user/file/{id}/edit',[FileController::class, 'editFile'])->name('file.edit');
 //Route::get('/uploads', [UserController::class, 'indexFile'])->name('uploads.index');
 Route::get('/uploads/create', [FileController::class, 'create'])->name('uploads.create');
 Route::post('/uploads', [FileController::class, 'store'])->name('uploads.store');

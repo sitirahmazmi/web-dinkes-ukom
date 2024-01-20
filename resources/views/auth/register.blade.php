@@ -7,7 +7,10 @@
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
+                <div class="card-body text-center">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <img src="{{ asset('/img/logo-dinkes.png') }}" class="img-circle elevation-2" style="width: 300px; height: 300px;">
+                    </div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 

@@ -5,9 +5,9 @@
 <div class="container pt-4 bg-white">
     <div class="row">
         <div class="col-md-8 col-xl-6">
-            <h1>Form Biodata</h1>
+            <h1>Edit Biodata</h1>
             <hr>
-            <form action="{{ route('biodata.update') }}" method="POST">
+            <form action="{{ url('/user/biodata/{id}') }}" method="POST">
             @csrf
                 <div class="mb-3">
                     <label class="form-label" for="nama">Nama Lengkap</label>

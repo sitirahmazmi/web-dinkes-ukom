@@ -8,10 +8,11 @@
             <div class="col">
                 <div class="align-items-center">
                     <h2>Lihat Data</h2>
-                </div>  
+                </div>
+                @forelse ($data as $item)  
                 <div class="align-items-right">
-                    <a href="{{ route('biodata.edit') }}" class="btn btn-primary" role="button">Edit Biodata</a>
-                    <a href="{{ route('biodata.edit') }}" class="btn btn-primary" role="button">Edit File</a>
+                    <a href="{{ url('/user/biodata/'.$item->id).'/edit' }}" class="btn btn-primary" role="button">Edit Biodata</a>
+                    <a href="{{ url('/user/file/'.$item->id).'/edit' }}" class="btn btn-primary" role="button">Edit File</a>
                 </div>  
                 @if (session()->has('pesan'))
                     <div class="alert alert-success">{{ session()->get('pesan') }}</div>
@@ -25,7 +26,7 @@
                             </tr>
                     </thead>
                         
-                            @forelse ($data as $item)
+                            
                                 <tr>
                                     <td>Nama</td>
                                     <td>{{ $item->nama }}</td>
@@ -108,10 +109,11 @@
                                 </tr>
                             @empty
                                 Data Kosong
-                            @endforelse
+                            
                         </tbody>
                     </tr>
                 </table>
+                @endforelse
                 <br>
                 <table border="1" class="table table-striped" >
                     <thead class="header">
@@ -125,47 +127,47 @@
                             @forelse ($files as $item)
                                 <tr>
                                     <td>SK Pangkat Terakhir</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sk_pangkat_terakhir }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->sk_pangkat_terakhir }}">Lihat</a>
                                         <br>{{ $item->sk_pangkat_terakhir }}</td> 
                                 </tr>
                                 <tr>
                                     <td>SK Fungsional Terakhir</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sk_fungsional_terakhir }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->sk_fungsional_terakhir }}">Lihat</a>
                                         <br>{{ $item->sk_fungsional_terakhir }}</td>
                                 </tr>
                                 <tr>
                                     <td>SK atau Surat Pencantuman Gelar</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sk_pencantuman_gelar }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->sk_pencantuman_gelar }}">Lihat</a>
                                         <br>{{ $item->sk_pencantuman_gelar }}</td>
                                 </tr>
                                 <tr>
                                     <td >Ijazah Terakhir</td>
-                                    <td ><a href="{{asset('/')}}upload_file_peserta/{{ $item->ijazah_terakhir }}">Lihat</a>
+                                    <td ><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->ijazah_terakhir }}">Lihat</a>
                                         <br>{{ $item->ijazah_terakhir }}</td>
                                 </tr>
                                 <tr>
                                     <td>Surat Tanda Registrasi (STR)</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->str }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->str }}">Lihat</a>
                                         <br>{{ $item->str }}</td>
                                 </tr>
                                 <tr>
                                     <td>Surat Izin Praktik (SIP)</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->sip }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->sip }}">Lihat</a>
                                         <br>{{ $item->sip }}</td>
                                 </tr>
                                 <tr>
                                     <td>Surat Rekomendasi</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->surat_rekomendasi }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->surat_rekomendasi }}">Lihat</a>
                                         <br>{{ $item->surat_rekomendasi }}</td>
                                 </tr>
                                 <tr>
                                     <td>Portofolio</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->portofolio }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->portofolio }}">Lihat</a>
                                         <br>{{ $item->portofolio }}</td>
                                 </tr>
                                 <tr>
                                     <td>Sasaran Kerja Pegawai (SKP)</td>
-                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->skp }}">Lihat</a>
+                                    <td><a href="{{asset('/')}}upload_file_peserta/{{ $item->user_id }}/{{ $item->skp }}">Lihat</a>
                                         <br>{{ $item->skp }}</td>
                                 </tr>
                                     {{-- <td><form method="POST" action="{{ route('siti.hapus', ['sitis'=> $item->id]) }}">
